@@ -22,11 +22,9 @@ func main() {
 func largest(instructions []string) (max, supreme int) {
 	registers := make(map[string]int)
 	for _, cmd := range instructions {
-		re := regexp.MustCompile(`\w+|[-0-9]+|[<=>!]+`) // https://github.com/google/re2/wiki/Syntax
-		t := re.FindAllStringSubmatch(cmd, -1)
-		// av inc 640 if uea == 0
-		// r  op  inc   tr cond test
-		r, op, tr, cond := t[0][0], t[1][0], t[4][0], t[5][0]
+		re := regexp.MustCompile(`\w+|[-0-9]+|[<=>!]+`)       // https://github.com/google/re2/wiki/Syntax
+		t := re.FindAllStringSubmatch(cmd, -1)                // example cmd: av inc 640 if uea ==  0
+		r, op, tr, cond := t[0][0], t[1][0], t[4][0], t[5][0] // vars:        r  op  inc -  tr cond test
 		increment, _ := strconv.Atoi(string(t[2][0]))
 		test, _ := strconv.Atoi(string(t[6][0]))
 		if op == "dec" {
