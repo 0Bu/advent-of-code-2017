@@ -30,12 +30,8 @@ func largest(instructions []string) (max, supreme int) {
 		if op == "dec" {
 			increment *= -1
 		}
-		if _, ok := registers[r]; !ok {
-			registers[r] = 0
-		}
-		if _, ok := registers[tr]; !ok {
-			registers[tr] = 0
-		}
+		registers[r], _ = registers[r] // create register, if doesn't exist
+		registers[tr], _ = registers[tr]
 		value, _ := registers[tr]
 		if (cond == ">" && value > test) || (cond == "<" && value < test) ||
 			(cond == ">=" && value >= test) || (cond == "<=" && value <= test) ||
